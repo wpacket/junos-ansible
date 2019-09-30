@@ -1,0 +1,29 @@
+#####
+# cli : ansible-playbook junos_config_pull.yml -i hosts
+#####
+
+- name: Pull Configuration from Junos equipment
+  hosts: ALL
+  gather_facts: no
+  pre_tasks:
+    - include_vars: vars.yml
+
+  tasks: 
+    - name: Checking devices connectivity
+      connection: local
+      wait_for: 
+        host: '{{ ansible_host }}'
+        port: 22  
+        timeout: 5
+
+    - name: Backup running configuration on each devices and save in  {{ configs_dir }} directory
+      connection: local
+      junos_config:
+        host: '{{ ansible_host }}'
+        port: 22 
+        username: '{{ ansible_ssh_user }}'
+        password: '{{ ansible_ssh_pass }}'
+        backup: yes
+        backup_options:
+          filename: '{{ hostname }}.txt'
+          dir_path: '{{ configs_dir }}'

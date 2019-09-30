@@ -1,0 +1,7 @@
+[ALL]
+10.10.46.70     hostname=qfx10k-sp
+10.10.46.71     hostname=qfx10k-spine1      
+10.10.46.72     hostname=qfx10k-spine2
+10.10.46.74     hostname=qfx10k-leaf2
+10.10.46.75     hostname=qfx10k-leaf3
+
